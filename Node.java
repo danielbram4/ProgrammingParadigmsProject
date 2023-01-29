@@ -3,10 +3,12 @@ implementation information found at https://www.baeldung.com/java-graphs*/
 
 public class Node {
     private Integer[] tuple = new Integer[2];
+    private boolean isExit = false;
 
-    public Node(int r, int c) {
+    public Node(int r, int c, boolean isExit) {
         tuple[0] = r;
         tuple[1] = c;
+        this.isExit = isExit;
     }
     
     public int getRow() {
@@ -19,6 +21,14 @@ public class Node {
 
     public Integer[] getTuple() {
         return tuple;
+    }
+
+    public boolean isExit(){
+        return isExit;
+    }
+
+    public void setExit(){
+        isExit = true;
     }
 
     public void setRow(int r) {
