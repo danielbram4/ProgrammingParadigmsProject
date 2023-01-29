@@ -7,4 +7,6 @@ public class Globals {
 	public static String endSymbol = "E";
     public static String startValue = "8";
 	public static String exitValue = "-1";
+	public static int exitValueInt = -1;
+    public static int traversableValue = 1;
 }

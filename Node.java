@@ -10,6 +10,11 @@ public class Node {
         tuple[1] = c;
         this.isExit = isExit;
     }
+
+    public Node(){
+        tuple[0] = null;
+        tuple[1] = null;
+    }
     
     public int getRow() {
         return tuple[0];
@@ -27,8 +32,8 @@ public class Node {
         return isExit;
     }
 
-    public void setExit(){
-        isExit = true;
+    public void setExit(boolean val){
+        isExit = val;
     }
 
     public void setRow(int r) {
@@ -44,6 +49,6 @@ public class Node {
     }
 
     public String toString() {
-        return "(" + tuple[0] + ", " + tuple[1] + ")";
+        return "{(" + tuple[0] + ", " + tuple[1] + ") " + isExit + "}";
     }
 }

@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Graph {
         
-        private Map<Node, List<Node>> mazeGraph;
+        private Map<Node, List<Node>> mazeGraph = new HashMap<>();
 
         public Graph() {
             this.mazeGraph = new HashMap<>();
@@ -12,20 +12,26 @@ public class Graph {
             return this;
         }
 
+        public Map<Node, List<Node>> getMazeGraph() {
+            return mazeGraph;
+        }
+
         public void addNode(Node n) {
             mazeGraph.putIfAbsent(n, new ArrayList<Node>());
             System.out.println("Node added: " + n);
         }
 
         public void addEdge(Node n1, Node n2) {
+
+            System.out.println("Edge added: " + n1 + " " + n2 + "");
             mazeGraph.get(n1).add(n2);
-            mazeGraph.get(n2).add(n1);
+            // mazeGraph.get(n2).add(n1);
         }
 
         Graph createTestGraph(){
             Graph test = new Graph();
-            Node n1 = new Node(0, 0);
-            Node n2 = new Node(0, 1);
+            Node n1 = new Node(0, 0, false);
+            Node n2 = new Node(0, 1, false);
             test.addNode(n1);
             test.addNode(n2);
             test.addEdge(n1,n2);
@@ -84,27 +90,27 @@ public class Graph {
         public static void main(String[] args) {
             Graph test = new Graph();
 
-            Node n1 = new Node(0, 1);
-            Node n2 = new Node(0, 2);
-            Node n3 = new Node(0, 3);
-            Node n4 = new Node(0, 4);
-            Node n5 = new Node(0, 5);
-            Node n6 = new Node(0, 6);
+            Node n1 = new Node(0, 1,false);
+            Node n2 = new Node(0, 2,false);
+            Node n3 = new Node(0, 3,false);
+            Node n4 = new Node(0, 4,false);
+            Node n5 = new Node(0, 5,false);
+            Node n6 = new Node(0, 6,false);
             test.addNode(n1);
             test.addNode(n2);
             test.addNode(n3);
             test.addNode(n4);
             test.addNode(n5);
             test.addNode(n6);
-            test.addEdge(n1,n2);
-            test.addEdge(n1,n3);
-            test.addEdge(n2,n4);
-            test.addEdge(n3,n4);
-            test.addEdge(n4,n5);
-            test.addEdge(n1,n6);
-            test.addEdge(n6,n5);
+            // test.addEdge(n1,n2);
+            // test.addEdge(n1,n3);
+            // test.addEdge(n2,n4);
+            // test.addEdge(n3,n4);
+            // test.addEdge(n4,n5);
+            // test.addEdge(n1,n6);
+            // test.addEdge(n6,n5);
             
-            test.printGraph();
+            
 
 
             List<Node> path = test.djikstra(n1, n5);

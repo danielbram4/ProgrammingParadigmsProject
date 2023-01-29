@@ -38,5 +38,6 @@ public class Maze {
 	public Coordinate getEndCord() {
 		return endCord;
 	}
+
 }
 

@@ -13,7 +13,7 @@ public class MazeSolver {
 
 	public MazeSolver(Maze maze){
 
-		System.out.println("THIS SIZE: " +maze.getMaze().size());
+		//Copy maze values to result string arrayList
 		for(int x=0; x<maze.getMaze().size(); x++) {
 			ArrayList<String> resultCols = new ArrayList<String>();
 			for(int y=0; y<maze.getMaze().get(x).size(); y++) {
@@ -24,8 +24,6 @@ public class MazeSolver {
 
 		startCord = maze.getStartCord();
 		endCord = maze.getEndCord();
-
-		System.out.println(startCord.getX() + " " + endCord);
 	}
 
 	public boolean solver()
@@ -81,39 +79,6 @@ public class MazeSolver {
 		return false;
 	}
 
-	private Graph buildGraph(int[][] maze, Coordinate startCord, Coordinate endCord) {
-		Graph graph = new Graph();
-		Node start = new Node(startCord.getX(), startCord.getY(), false);
-		graph.addNode(start);
 
-		
-		
-
-		// for(int x=0; x<maze.length; x++)
-		// 	for(int y=0; y<maze[x].length; y++)	
-		// 		if(maze[x][y].equals("0"))
-		// 			graph.addVertex(new Vertex(x, y));
-		return graph;
-	}
-
-	// public void checkTraversable(Node n, int[][] maze){
-	// 	//Check down
-	// 	if(isTraversable(maze[n.getRow()][n.getCol() + 1])){
-	// 		Node down = new Node(n.getRow(), n.getCol() + 1, maze[n.getRow()][n.getCol() + 1] == exitSymbol);
-
-	// 	}
-	// }
-	public boolean isTraversable(int x){
-		return x == 1;
-	}
-
-	public static void main(String args[]){
-		MazeSolver mazeSolver = new MazeSolver();
-		
-		System.out.println(mazeSolver.isTraversable(1));
-
-		
-
-	}
 
 }

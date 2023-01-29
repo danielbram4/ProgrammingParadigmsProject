@@ -14,14 +14,6 @@ public class Main {
 
         MazeSolver solver = new MazeSolver(maze);
         solver.solver();
-        // solver.print_result();
-
-
-
-        
-
-        
-
     }
 
 }
