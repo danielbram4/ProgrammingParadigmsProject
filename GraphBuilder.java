@@ -11,54 +11,155 @@ public class GraphBuilder {
         return graph;
     }
 
-    public void checkTraversable(Node n, Maze maze) {
-            
-        if(n == null){
-            return;
-        }
-        // Check down
-        if (n.getRow()+1 < maze.getMaze().get(n.getRow()).size() && isTraversable(maze.getMaze().get(n.getRow() + 1).get(n.getCol()))) {
-            
-            Node down = new Node(n.getRow() + 1, n.getCol());
-            System.out.println("Down: " + down);
-            graph.addNode(down);
-            graph.addEdge(n, down);
-            checkTraversable(down, maze);
-        }
+    // public Node checkTraversable(Node n, Maze maze) {
 
-        // Check right 
-        if (n.getCol()+1 < maze.getMaze().size() && isTraversable(maze.getMaze().get(n.getRow()).get(n.getCol() + 1))) {
-            
-            Node right = new Node(n.getRow(), n.getCol() + 1);
-            System.out.println("Right: " + right);
-            graph.addNode(right);
-            graph.addEdge(n, right);
-            checkTraversable(right, maze);
-        }
+    //     System.out.println("Checking: " + n + "");
+    //     // Check down
+    //     if (isInRowBounds(n.getRow() + 1, maze) && isTraversable(getDownValue(n, maze))) {
 
-        // Check left
-        if (n.getCol()-1 >= 0 && isTraversable(maze.getMaze().get(n.getRow()).get(n.getCol() - 1))) {
-            
-            Node left = new Node(n.getRow(), n.getCol() - 1);
-            System.out.println("Left: " + left);
-            graph.addNode(left);
-            graph.addEdge(n, left);
-            checkTraversable(left, maze);
-        }
+    //         Node down = new Node(n.getRow() + 1, n.getCol());
+    //         System.out.println("Down: " + down);
+    //         if (graph.addNode(down)) {
+    //             graph.addEdge(n, down);
+    //             return checkTraversable(down, maze);
+    //         }
+    //     }
 
-        // Check up
-        if (n.getRow()-1 >= 0 && isTraversable(maze.getMaze().get(n.getRow() - 1).get(n.getCol()))) {
-            
+    //     if (isInColBounds(n.getCol() + 1, maze) && isTraversable(getRightValue(n, maze))) {
+
+    //         Node right = new Node(n.getRow(), n.getCol() + 1);
+    //         System.out.println("Right: " + right);
+    //         if (graph.addNode(right)) {
+    //             graph.addEdge(n, right);
+    //             return checkTraversable(right, maze);
+    //         }
+    //     }
+
+    //     if (isInColBounds(n.getCol() - 1, maze) && isTraversable(getLeftValue(n, maze))) {
+
+    //         Node left = new Node(n.getRow(), n.getCol() - 1);
+    //         System.out.println("Left: " + left);
+    //         if (graph.addNode(left)) {
+    //             graph.addEdge(n, left);
+    //             return checkTraversable(left, maze);
+    //         }
+    //     }
+
+    //     if (isInRowBounds(n.getRow() - 1, maze) && isTraversable(getUpValue(n, maze))) {
+
+    //         Node up = new Node(n.getRow() - 1, n.getCol());
+    //         System.out.println("Up: " + up);
+    //         if (graph.addNode(up)) {
+    //             graph.addEdge(n, up);
+    //             return checkTraversable(up, maze);
+    //         }
+    //     } 
+    //     return n;
+    // }
+
+    public Node checkUp(Node n, Maze maze) {
+        if (isInRowBounds(n.getRow() - 1, maze) && isTraversable(getUpValue(n, maze))) {
+
             Node up = new Node(n.getRow() - 1, n.getCol());
             System.out.println("Up: " + up);
-            graph.addNode(up);
+            if (graph.addNode(up)) {
+                graph.addEdge(n, up);
+                return checkTraversable(up, maze);
+            }
+        } 
+        return null;
+    }
+
+    public Node checkDown(Node n, Maze maze) {
+        if (isInRowBounds(n.getRow() + 1, maze) && isTraversable(getDownValue(n, maze))) {
+
+            Node down = new Node(n.getRow() + 1, n.getCol());
+            System.out.println("Down: " + down);
+            if (graph.addNode(down)) {
+                graph.addEdge(n, down);
+                return checkTraversable(down, maze);
+            }
+        }
+        return null;
+    }
+
+    public Node checkLeft(Node n, Maze maze) {
+        if (isInColBounds(n.getCol() - 1, maze) && isTraversable(getLeftValue(n, maze))) {
+
+            Node left = new Node(n.getRow(), n.getCol() - 1);
+            System.out.println("Left: " + left);
+            if (graph.addNode(left)) {
+                graph.addEdge(n, left);
+                return checkTraversable(left, maze);
+            }
+        }
+        return null;
+    }
+
+    public Node checkRight(Node n, Maze maze) {
+        if (isInColBounds(n.getCol() + 1, maze) && isTraversable(getRightValue(n, maze))) {
+
+            Node right = new Node(n.getRow(), n.getCol() + 1);
+            System.out.println("Right: " + right);
+            if (graph.addNode(right)) {
+                graph.addEdge(n, right);
+                return checkTraversable(right, maze);
+            }
+        }
+        return null;
+    }
+
+    public void checkTrav(Node n, Maze maze){
+
+        Node up = checkUp(n, maze);
+        Node down = checkDown(n, maze);
+        Node left = checkLeft(n, maze);
+        Node right = checkRight(n, maze);
+
+        if(up != null){
             graph.addEdge(n, up);
-            checkTraversable(up, maze);
+            checkTrav(up, maze);
+        }
+        if(down != null){
+            graph.addEdge(n, down);
+            checkTrav(down, maze);
+        }
+        if(left != null){
+            graph.addEdge(n, left);
+            checkTrav(left, maze);
+        }
+        if(right != null){
+            graph.addEdge(n, right);
+            checkTrav(right, maze);
         }
     }
 
     public boolean isTraversable(int x) {
         return x == Globals.traversableValue;
+    }
+
+    public boolean isInRowBounds(int row, Maze maze) {
+        return row >= 0 && row < maze.getMaze().size();
+    }
+
+    public boolean isInColBounds(int col, Maze maze) {
+        return col >= 0 && col < maze.getMaze().get(0).size();
+    }
+
+    public int getUpValue(Node n, Maze maze) {
+        return maze.getMaze().get(n.getRow() - 1).get(n.getCol());
+    }
+
+    public int getDownValue(Node n, Maze maze) {
+        return maze.getMaze().get(n.getRow() + 1).get(n.getCol());
+    }
+
+    public int getRightValue(Node n, Maze maze) {
+        return maze.getMaze().get(n.getRow()).get(n.getCol() + 1);
+    }
+
+    public int getLeftValue(Node n, Maze maze) {
+        return maze.getMaze().get(n.getRow()).get(n.getCol() - 1);
     }
 
     public static void main(String args[]) {
@@ -67,7 +168,6 @@ public class GraphBuilder {
         ArrayList<ArrayList<Integer>> maze = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> row1 = new ArrayList<Integer>();
         ArrayList<Integer> row2 = new ArrayList<Integer>();
-
 
         row1.add(1);
         row1.add(1);
@@ -81,13 +181,11 @@ public class GraphBuilder {
         Maze testMaze = new Maze(maze, new Coordinate(0, 0), new Coordinate(1, 1));
         Node start = new Node(testMaze.getStartCord().getRow(), testMaze.getStartCord().getCol());
 
-        System.out.println(testMaze);
-
         builder.graph.addNode(start);
 
-        builder.graph.printGraph();
+        builder.checkTrav(start, testMaze);
 
-        builder.checkTraversable(start, testMaze);
+        builder.graph.printGraph();
 
     }
 }

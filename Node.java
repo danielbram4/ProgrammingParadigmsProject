@@ -5,8 +5,8 @@ public class Node {
     private Coordinate coordinates = new Coordinate();
 
     public Node(int r, int c) {
-        coordinates.setRow(c);
-        coordinates.setCol(r);
+        coordinates.setRow(r);
+        coordinates.setCol(c);
     }
 
     public Node(){
@@ -30,6 +30,6 @@ public class Node {
     }
 
     public String toString() {
-        return "{(" + coordinates.getRow() + ", " + coordinates.getCol() + ") ";
+        return "(" + coordinates.getRow() + ", " + coordinates.getCol() + ") ";
     }
 }

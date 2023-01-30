@@ -15,7 +15,6 @@ public class Main {
         MazeSolver solver = new MazeSolver(maze);
         solver.solver();
     }
-
 }
 
 
