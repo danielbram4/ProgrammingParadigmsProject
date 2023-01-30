@@ -2,53 +2,34 @@
 implementation information found at https://www.baeldung.com/java-graphs*/
 
 public class Node {
-    private Integer[] tuple = new Integer[2];
-    private boolean isExit = false;
+    private Coordinate coordinates = new Coordinate();
 
-    public Node(int r, int c, boolean isExit) {
-        tuple[0] = r;
-        tuple[1] = c;
-        this.isExit = isExit;
+    public Node(int r, int c) {
+        coordinates.setRow(c);
+        coordinates.setCol(r);
     }
 
     public Node(){
-        tuple[0] = null;
-        tuple[1] = null;
+        
     }
     
     public int getRow() {
-        return tuple[0];
+        return coordinates.getRow();
     }
 
     public int getCol() {
-        return tuple[1];
+        return coordinates.getCol();
     }
 
-    public Integer[] getTuple() {
-        return tuple;
+    public Coordinate getCoordinates() {
+        return coordinates;
     }
 
-    public boolean isExit(){
-        return isExit;
-    }
-
-    public void setExit(boolean val){
-        isExit = val;
-    }
-
-    public void setRow(int r) {
-        tuple[0] = r;
-    }
-
-    public void setCol(int c) {
-        tuple[1] = c;
-    }
-
-    public void setTuple(Integer[] t) {
-        tuple = t;
+    public void setCoordinates(int r, int c) {
+        this.coordinates = new Coordinate(r, c);
     }
 
     public String toString() {
-        return "{(" + tuple[0] + ", " + tuple[1] + ") " + isExit + "}";
+        return "{(" + coordinates.getRow() + ", " + coordinates.getCol() + ") ";
     }
 }

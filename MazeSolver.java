@@ -29,8 +29,8 @@ public class MazeSolver {
 	public boolean solver()
 	{
 		//Create walls and the start and end points.
-		result.get(startCord.getY()).set(startCord.getX(), Globals.startSymbol);
-		result.get(endCord.getY()).set(endCord.getX(), Globals.endSymbol);
+		result.get(startCord.getRow()).set(startCord.getCol(), Globals.startSymbol);
+		result.get(endCord.getRow()).set(endCord.getCol(), Globals.endSymbol);
 
 		for(int x=0; x<result.size(); x++) {
 			for(int y=0; y<result.get(x).size(); y++) {

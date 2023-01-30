@@ -1,30 +1,35 @@
 public class Coordinate {
-	private int x, y;
+	private int r, c;
 	
-	public Coordinate(int y, int x)
+	public Coordinate() {
+		this.r = -1;
+		this.c = -1;
+	}
+
+	public Coordinate(int r, int c)
 	{
-		this.x = x;
-		this.y = y;
+		this.r = r;
+		this.c = c;
 	}
 	
-	public int getX() {
-		return x;
+	public int getRow() {
+		return r;
 	}
 	
-	public int getY() {
-		return y;
+	public int getCol() {
+		return c;
 	}
 	
-	public void setX(int x) {
-		this.x = x;
+	public void setRow(int r) {
+		this.r = r;
 	}
 	
-	public void setY(int y) {
-		this.y = y;
+	public void setCol(int c) {
+		this.c = c;
 	}
 	
 	@Override
 	public String toString() {
-		return "(x, y) = (" + x + ", " + y + ")";
+		return "(r, c) = (" + r + ", " + c + ")";
 	}
 }

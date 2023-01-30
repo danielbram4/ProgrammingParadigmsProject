@@ -5,82 +5,56 @@ public class GraphBuilder {
     private Graph graph = new Graph();
 
     public Graph buildGraph(Maze maze) {
-        Node start = new Node(maze.getStartCord().getX(), maze.getStartCord().getY(), false);
+        Node start = new Node(maze.getStartCord().getRow(), maze.getStartCord().getCol());
         graph.addNode(start);
 
         return graph;
     }
 
-    public Node checkTraversable(Node n, Maze maze) {
-
-        
-
-        if (n == null){
-            return null;
+    public void checkTraversable(Node n, Maze maze) {
+            
+        if(n == null){
+            return;
         }
-            
         // Check down
-        if (n.getCol()+1 < maze.getMaze().get(n.getRow()).size() && isTraversable(maze.getMaze().get(n.getRow()).get(n.getCol() + 1))) {
+        if (n.getRow()+1 < maze.getMaze().get(n.getRow()).size() && isTraversable(maze.getMaze().get(n.getRow() + 1).get(n.getCol()))) {
             
-            Node newNode = new Node();
-            newNode.setRow(n.getRow());
-            newNode.setCol(n.getCol() + 1);
-            newNode.setExit(false);
-
-            System.out.println("NEW NODE: " + newNode);
-            graph.addNode(newNode);
-
-            graph.addEdge(n, newNode);
-            // return newNode;
+            Node down = new Node(n.getRow() + 1, n.getCol());
+            System.out.println("Down: " + down);
+            graph.addNode(down);
+            graph.addEdge(n, down);
+            checkTraversable(down, maze);
         }
 
         // Check right 
-        if (n.getRow()+1 < maze.getMaze().size() && isTraversable(maze.getMaze().get(n.getRow() + 1).get(n.getCol()))) {
+        if (n.getCol()+1 < maze.getMaze().size() && isTraversable(maze.getMaze().get(n.getRow()).get(n.getCol() + 1))) {
             
-            Node newNode = new Node();
-            newNode.setRow(n.getRow() + 1);
-            newNode.setCol(n.getCol());
-            newNode.setExit(false);
-
-            System.out.println("NEW NODE: " + newNode);
-            graph.addNode(newNode);
-
-            graph.addEdge(n, newNode);
-            // return newNode;
+            Node right = new Node(n.getRow(), n.getCol() + 1);
+            System.out.println("Right: " + right);
+            graph.addNode(right);
+            graph.addEdge(n, right);
+            checkTraversable(right, maze);
         }
 
         // Check left
         if (n.getCol()-1 >= 0 && isTraversable(maze.getMaze().get(n.getRow()).get(n.getCol() - 1))) {
             
-            Node newNode = new Node();
-            newNode.setRow(n.getRow());
-            newNode.setCol(n.getCol() - 1);
-            newNode.setExit(false);
-
-            System.out.println("NEW NODE: " + newNode);
-            graph.addNode(newNode);
-
-            graph.addEdge(n, newNode);
-            // return newNode;
+            Node left = new Node(n.getRow(), n.getCol() - 1);
+            System.out.println("Left: " + left);
+            graph.addNode(left);
+            graph.addEdge(n, left);
+            checkTraversable(left, maze);
         }
 
         // Check up
         if (n.getRow()-1 >= 0 && isTraversable(maze.getMaze().get(n.getRow() - 1).get(n.getCol()))) {
             
-            Node newNode = new Node();
-            newNode.setRow(n.getRow() - 1);
-            newNode.setCol(n.getCol());
-            newNode.setExit(false);
-
-            System.out.println("NEW NODE: " + newNode);
-            graph.addNode(newNode);
-
-            graph.addEdge(n, newNode);
-            // return newNode;
+            Node up = new Node(n.getRow() - 1, n.getCol());
+            System.out.println("Up: " + up);
+            graph.addNode(up);
+            graph.addEdge(n, up);
+            checkTraversable(up, maze);
         }
-
-        return null;
-
     }
 
     public boolean isTraversable(int x) {
@@ -102,18 +76,18 @@ public class GraphBuilder {
         maze.add(row1);
         maze.add(row2);
 
+        System.out.println(maze);
+
         Maze testMaze = new Maze(maze, new Coordinate(0, 0), new Coordinate(1, 1));
-        Node start = new Node(testMaze.getStartCord().getX(), testMaze.getStartCord().getY(), false);
+        Node start = new Node(testMaze.getStartCord().getRow(), testMaze.getStartCord().getCol());
 
         System.out.println(testMaze);
 
         builder.graph.addNode(start);
 
-        Node n = builder.checkTraversable(start, testMaze);
-
         builder.graph.printGraph();
 
+        builder.checkTraversable(start, testMaze);
 
-        System.out.println("NODE: " + n);
     }
 }
