@@ -46,6 +46,7 @@ public class MazeBuilder {
                     System.out.println("Found End at: (" + i + ", " + row + ")");
                     endX = i;
                     endY = row;
+                    colVals[i] = Globals.pathValue;
                 }
 
                 col.add(Integer.parseInt(colVals[i]));

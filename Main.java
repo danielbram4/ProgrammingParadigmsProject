@@ -5,12 +5,13 @@ public class Main {
     
     public static void main(String[] args) {
 
-        MazeBuilder builder = new MazeBuilder();
+        MazeBuilder mazeBuilder = new MazeBuilder();
+        GraphBuilder graphBuilder = new GraphBuilder();
         
-        Maze maze = builder.buildMaze();
+        Maze maze = mazeBuilder.buildMaze();
+        Graph graph = graphBuilder.buildGraph(maze);
 
-        int size =maze.getMaze().size();
-        System.out.println("size: "+size);
+        graph.getGraph().printGraph();
 
         MazeSolver solver = new MazeSolver(maze);
         solver.solver();

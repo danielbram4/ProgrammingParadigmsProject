@@ -3,6 +3,7 @@ import java.util.*;
 public class Graph {
 
     private Map<Node, List<Node>> mazeGraph = new HashMap<>();
+    private Node startNode, endNode;
 
     public Graph() {
         this.mazeGraph = new HashMap<>();
@@ -36,16 +37,32 @@ public class Graph {
     }
 
     public void addEdge(Node n1, Node n2) {
-        if (checkIfNodeExists(n1) && checkIfNodeExists(n2) && !checkIfEdgeExists(n1, n2)) {
+        if (checkIfNodeExists(n1) && checkIfNodeExists(n2) && !checkIfEdgeExists(n1, n2) && !isDiagonal(n1,n2) && isAdjacent(n1,n2)) {
             mazeGraph.get(n1).add(n2);
             mazeGraph.get(n2).add(n1);
             System.out.println("Edge added: " + n1 + " " + n2 + "");
-
-            printGraph();
-
         }
+    }
 
-        // mazeGraph.get(n2).add(n1);
+    public boolean isDiagonal(Node n1, Node n2) {
+        if (checkIfNodeExists(n1) && checkIfNodeExists(n2)) {
+            if(n1.getRow() != n2.getRow() && n1.getCol() != n2.getCol()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isAdjacent(Node n1, Node n2) {
+        if (checkIfNodeExists(n1) && checkIfNodeExists(n2)) {
+            if(n1.getRow() == n2.getRow() && (n1.getCol() - n2.getCol() == 1 || n1.getCol() - n2.getCol() == -1)) {
+                return true;
+            }
+            if(n1.getCol() == n2.getCol() && (n1.getRow() - n2.getRow() == 1 || n1.getRow() - n2.getRow() == -1)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean checkIfEdgeExists(Node n1, Node n2) {
@@ -70,6 +87,14 @@ public class Graph {
         return mazeGraph.containsKey(n);
     }
 
+    public void setStartNode(Node n) {
+            startNode = n;
+    }
+
+    public void setEndNode(Node n) {
+            endNode = n;
+    }
+
     Graph createTestGraph() {
         Graph test = new Graph();
         Node n1 = new Node(0, 0);
@@ -84,6 +109,10 @@ public class Graph {
         for (Node n : mazeGraph.keySet()) {
             System.out.println(n + " : " + mazeGraph.get(n));
         }
+
+        System.out.println("Start Node: " + startNode);
+        System.out.println(mazeGraph.get(endNode));
+        System.out.println("End Node: " + endNode);
     }
 
     public List<Node> djikstra(Node start, Node end) {
@@ -127,6 +156,15 @@ public class Graph {
         }
         Collections.reverse(path);
         return path;
+    }
+
+    public boolean findPath(Node start, Node end) {
+        List<Node> path = djikstra(start, end);
+        for (Node n : path) {
+            System.out.println(n);
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {

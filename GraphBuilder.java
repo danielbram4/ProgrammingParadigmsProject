@@ -6,7 +6,13 @@ public class GraphBuilder {
 
     public Graph buildGraph(Maze maze) {
         Node start = new Node(maze.getStartCord().getRow(), maze.getStartCord().getCol());
+        Node end = new Node(maze.getEndCord().getRow(), maze.getEndCord().getCol());
         graph.addNode(start);
+        // graph.addNode(end);
+        System.out.println(end.hashCode());
+        graph.setStartNode(start);
+        graph.setEndNode(end);
+        checkTrav(start, maze);
 
         return graph;
     }
@@ -64,7 +70,7 @@ public class GraphBuilder {
             System.out.println("Up: " + up);
             if (graph.addNode(up)) {
                 graph.addEdge(n, up);
-                return checkTraversable(up, maze);
+                return checkTrav(up, maze);
             }
         } 
         return null;
@@ -77,7 +83,7 @@ public class GraphBuilder {
             System.out.println("Down: " + down);
             if (graph.addNode(down)) {
                 graph.addEdge(n, down);
-                return checkTraversable(down, maze);
+                return checkTrav(down, maze);
             }
         }
         return null;
@@ -90,7 +96,7 @@ public class GraphBuilder {
             System.out.println("Left: " + left);
             if (graph.addNode(left)) {
                 graph.addEdge(n, left);
-                return checkTraversable(left, maze);
+                return checkTrav(left, maze);
             }
         }
         return null;
@@ -103,13 +109,13 @@ public class GraphBuilder {
             System.out.println("Right: " + right);
             if (graph.addNode(right)) {
                 graph.addEdge(n, right);
-                return checkTraversable(right, maze);
+                return checkTrav(right, maze);
             }
         }
         return null;
     }
 
-    public void checkTrav(Node n, Maze maze){
+    public Node checkTrav(Node n, Maze maze){
 
         Node up = checkUp(n, maze);
         Node down = checkDown(n, maze);
@@ -118,20 +124,22 @@ public class GraphBuilder {
 
         if(up != null){
             graph.addEdge(n, up);
-            checkTrav(up, maze);
+            return checkTrav(up, maze);
         }
         if(down != null){
             graph.addEdge(n, down);
-            checkTrav(down, maze);
+            return checkTrav(down, maze);
         }
         if(left != null){
             graph.addEdge(n, left);
-            checkTrav(left, maze);
+            return checkTrav(left, maze);
         }
         if(right != null){
             graph.addEdge(n, right);
-            checkTrav(right, maze);
+            return checkTrav(right, maze);
         }
+
+        return n;
     }
 
     public boolean isTraversable(int x) {
