@@ -39,11 +39,11 @@ public class MazeBuilder {
             ArrayList<Integer> col = new ArrayList<Integer>();
             for(int i = 0; i < colVals.length; i++){
                 if(colVals[i].equals(Globals.startValue)){
-                    System.out.println("Found Start at: (" + i + ", " + row + ")");
+                    System.out.println("Found Start at: (" + row + ", " + i + ")");
                     startX = i;
                     startY = row;
                 } else if(colVals[i].equals(Globals.exitValue)){
-                    System.out.println("Found End at: (" + i + ", " + row + ")");
+                    System.out.println("Found End at: (" + row + ", " + i + ")");
                     endX = i;
                     endY = row;
                     colVals[i] = Globals.pathValue;

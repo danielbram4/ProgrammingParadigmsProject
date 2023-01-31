@@ -1,5 +1,5 @@
-
-
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     
@@ -11,10 +11,12 @@ public class Main {
         Maze maze = mazeBuilder.buildMaze();
         Graph graph = graphBuilder.buildGraph(maze);
 
-        graph.getGraph().printGraph();
+        // graph.getGraph().printGraph();
 
         MazeSolver solver = new MazeSolver(maze);
-        solver.solver();
+
+        ArrayList<Node> path = graph.findPath(graph.getStartNode(), graph.getEndNode());
+        solver.buildPrintMaze(path);
     }
 }
 

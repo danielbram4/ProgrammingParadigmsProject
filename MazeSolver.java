@@ -58,6 +58,25 @@ public class MazeSolver {
 		
 		return true;
 	}
+
+	public void buildPrintMaze(ArrayList<Node> path){
+
+		for(int x=0; x<result.size(); x++) {
+			for(int y=0; y<result.get(x).size(); y++) {
+				if(result.get(x).get(y).equals(Globals.wallValue)) {
+					result.get(x).set(y, Globals.wallSymbol);
+				} else if(result.get(x).get(y).equals(Globals.pathValue)){
+					result.get(x).set(y, Globals.pathSymbol);
+				}
+			}
+		}
+
+		for(int x=0; x<path.size(); x++){
+			result.get(path.get(x).getCoordinates().getRow()).set(path.get(x).getCoordinates().getCol(), Globals.ANSI_GREEN +  "X" + Globals.TEXT_RESET);
+		}
+
+		print_result();
+	}
 	
 	public void print_result()
 	{

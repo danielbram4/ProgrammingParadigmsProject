@@ -9,4 +9,6 @@ public class Globals {
 	public static String exitValue = "-1";
 	public static int exitValueInt = -1;
     public static int traversableValue = 1;
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String TEXT_RESET = "\u001B[0m";
 }

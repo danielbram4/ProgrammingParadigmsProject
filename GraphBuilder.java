@@ -6,14 +6,10 @@ public class GraphBuilder {
 
     public Graph buildGraph(Maze maze) {
         Node start = new Node(maze.getStartCord().getRow(), maze.getStartCord().getCol());
-        Node end = new Node(maze.getEndCord().getRow(), maze.getEndCord().getCol());
         graph.addNode(start);
-        // graph.addNode(end);
-        System.out.println(end.hashCode());
         graph.setStartNode(start);
-        graph.setEndNode(end);
         checkTrav(start, maze);
-
+        graph.setEndNode(graph.getNode(maze.getEndCord().getRow(), maze.getEndCord().getCol()));
         return graph;
     }
 
@@ -67,7 +63,6 @@ public class GraphBuilder {
         if (isInRowBounds(n.getRow() - 1, maze) && isTraversable(getUpValue(n, maze))) {
 
             Node up = new Node(n.getRow() - 1, n.getCol());
-            System.out.println("Up: " + up);
             if (graph.addNode(up)) {
                 graph.addEdge(n, up);
                 return checkTrav(up, maze);
@@ -80,7 +75,6 @@ public class GraphBuilder {
         if (isInRowBounds(n.getRow() + 1, maze) && isTraversable(getDownValue(n, maze))) {
 
             Node down = new Node(n.getRow() + 1, n.getCol());
-            System.out.println("Down: " + down);
             if (graph.addNode(down)) {
                 graph.addEdge(n, down);
                 return checkTrav(down, maze);
@@ -93,7 +87,6 @@ public class GraphBuilder {
         if (isInColBounds(n.getCol() - 1, maze) && isTraversable(getLeftValue(n, maze))) {
 
             Node left = new Node(n.getRow(), n.getCol() - 1);
-            System.out.println("Left: " + left);
             if (graph.addNode(left)) {
                 graph.addEdge(n, left);
                 return checkTrav(left, maze);
@@ -106,7 +99,6 @@ public class GraphBuilder {
         if (isInColBounds(n.getCol() + 1, maze) && isTraversable(getRightValue(n, maze))) {
 
             Node right = new Node(n.getRow(), n.getCol() + 1);
-            System.out.println("Right: " + right);
             if (graph.addNode(right)) {
                 graph.addEdge(n, right);
                 return checkTrav(right, maze);
