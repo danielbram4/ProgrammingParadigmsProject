@@ -20,52 +20,6 @@ public class GraphBuilder {
         return graph;
     }
 
-    // public Node checkTraversable(Node n, Maze maze) {
-
-    //     System.out.println("Checking: " + n + "");
-    //     // Check down
-    //     if (isInRowBounds(n.getRow() + 1, maze) && isTraversable(getDownValue(n, maze))) {
-
-    //         Node down = new Node(n.getRow() + 1, n.getCol());
-    //         System.out.println("Down: " + down);
-    //         if (graph.addNode(down)) {
-    //             graph.addEdge(n, down);
-    //             return checkTraversable(down, maze);
-    //         }
-    //     }
-
-    //     if (isInColBounds(n.getCol() + 1, maze) && isTraversable(getRightValue(n, maze))) {
-
-    //         Node right = new Node(n.getRow(), n.getCol() + 1);
-    //         System.out.println("Right: " + right);
-    //         if (graph.addNode(right)) {
-    //             graph.addEdge(n, right);
-    //             return checkTraversable(right, maze);
-    //         }
-    //     }
-
-    //     if (isInColBounds(n.getCol() - 1, maze) && isTraversable(getLeftValue(n, maze))) {
-
-    //         Node left = new Node(n.getRow(), n.getCol() - 1);
-    //         System.out.println("Left: " + left);
-    //         if (graph.addNode(left)) {
-    //             graph.addEdge(n, left);
-    //             return checkTraversable(left, maze);
-    //         }
-    //     }
-
-    //     if (isInRowBounds(n.getRow() - 1, maze) && isTraversable(getUpValue(n, maze))) {
-
-    //         Node up = new Node(n.getRow() - 1, n.getCol());
-    //         System.out.println("Up: " + up);
-    //         if (graph.addNode(up)) {
-    //             graph.addEdge(n, up);
-    //             return checkTraversable(up, maze);
-    //         }
-    //     } 
-    //     return n;
-    // }
-
     /**
      * Checks if the node one row up from the given node is traversable,
      * adds the node to the graph, and adds an edge between the nodes.
@@ -265,6 +219,9 @@ public class GraphBuilder {
         return maze.getMaze().get(n.getRow()).get(n.getCol() - 1);
     }
 
+
+
+    //You can use this main method for local testing delete when done
     public static void main(String args[]) {
         GraphBuilder builder = new GraphBuilder();
 
