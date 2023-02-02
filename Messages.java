@@ -1,6 +1,7 @@
 
-public class Messages {
 
+//Put all print statements here
+public class Messages {
     public void FOUND() {
         System.out.print("Hello");
     }
