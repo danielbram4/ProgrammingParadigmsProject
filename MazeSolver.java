@@ -52,7 +52,7 @@ public class MazeSolver {
 		//Finds path
 		// boolean success = path_finder(maze, startCord);
 		
-		//Clears the result, null needs to be replaced by visited
+		// Clears the result, null needs to be replaced by visited
 		// for(int x=0; x<maze.length; x++)
 		// 	for(int y=0; y<maze[x].length; y++)	
 		// 		if(result[x][y] == null)
@@ -92,6 +92,9 @@ public class MazeSolver {
 			// Replace the elements in the result list with X's (the solution path) at the coordinates of the path.
 			result.get(path.get(x).getCoordinates().getRow()).set(path.get(x).getCoordinates().getCol(), Globals.ANSI_GREEN +  "X" + Globals.TEXT_RESET);
 		}
+
+		result.get(startCord.getRow()).set(startCord.getCol(),Globals.ANSI_BLUE +  "S" + Globals.TEXT_RESET);
+		result.get(endCord.getRow()).set(endCord.getCol(),Globals.ANSI_BLUE +  "E" + Globals.TEXT_RESET);
 
 		// Call the print_result function to print the final solution of the maze.
 		print_result();

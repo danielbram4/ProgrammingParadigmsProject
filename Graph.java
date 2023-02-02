@@ -160,14 +160,106 @@ public class Graph {
 
         return path;
     }
+
     public ArrayList<Node> findPath(Node start, Node end) {
-        ArrayList<Node> path = djikstra2(start, end);
+        // ArrayList<Node> path = djikstra2(start, end);
+        ArrayList<Node> path = DFS(start, end);
         // System.out.println("Path: " + path);
 
         return path;
     }
 
+    // public ArrayList<Node> depthFirstSearch(Node startNode, Node endNode) {
+    //     // Set<Node> visited = new HashSet<>();
+    //     ArrayList<Node> visited = new ArrayList<>();
+    //     return depthFirstSearch(startNode, endNode, visited);
+    // }
 
+    // private ArrayList<Node> depthFirstSearch(Node currentNode, Node endNode, ArrayList<Node> visited) {
+    //     visited.add(currentNode);
+    
+    //     if (currentNode == endNode) {
+    //         ArrayList<Node> path = new ArrayList<>();
+    //         path.add(endNode);
+    //         System.out.println("Path: " + null);
+    //         return path;
+    //     }
+    
+    //     List<Node> neighbors = mazeGraph.get(currentNode);
+    //     for (Node neighbor : neighbors) {
+    //         if (!visited.contains(neighbor)) {
+    //             ArrayList<Node> path = depthFirstSearch(neighbor, endNode, visited);
+    //             if (path != null) {
+    //                 // path.add(0, currentNode);
+    //                 System.out.println("Path: " + path);
+    //                 path.add(currentNode);
+    //                 return path;
+    //             }
+    //         }
+    //     }
+    //     System.out.println("Path: " + null);
+    //     return null;
+    // }
+
+    public ArrayList<Node> depthFirstSearch(Node startNode, Node endNode) {
+        // Stack<Node> stack = new Stack<>();
+        // stack.push(startNode);
+
+        ArrayList<Node> queue = new ArrayList<>();
+        queue.add(startNode);
+        ArrayList<Node> visited = new ArrayList<>();
+        ArrayList<Node> path = new ArrayList<>();
+        int x = 0;
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.get(x);
+            if (currentNode == endNode) {
+                path.add(endNode);
+                return path;
+            }
+            if (!visited.contains(currentNode)) {
+                visited.add(currentNode);
+                List<Node> neighbors = mazeGraph.get(currentNode);
+                for (Node neighbor : neighbors) {
+                    if (!visited.contains(neighbor)) {
+                        queue.add(neighbor);
+                    }
+                }
+            }
+            x++;
+        }
+        return null;
+    }
+
+    // DFS algorithm adapted from https://gist.github.com/Staticity/0af28ba92b4ea32fef74
+    public boolean DFSScott(Node current, Node end, ArrayList<Node> visited, ArrayList<Node> path){
+        visited.add(current);
+        if(current == end){
+            return true;
+        }
+        List<Node> neighbours = new ArrayList<>();
+        neighbours = mazeGraph.get(current);
+        for(Node n : neighbours){
+            if(!visited.contains(n) && DFSScott(n, end, visited, path)){
+                path.add(n);
+                return true;
+            }
+        
+        }
+        return false;
+    }
+
+    public ArrayList<Node> DFS(Node start, Node end){
+        ArrayList<Node> visited = new ArrayList<>();
+        ArrayList<Node> path = new ArrayList<>();
+
+        if(DFSScott(start, end, visited, path)){
+            System.out.println(path);
+            return path;
+        } else {
+            return null;
+        }
+    }
+    
     //Used for testing delete when done
     public static void main(String[] args) {
         Graph test = new Graph();
@@ -178,15 +270,14 @@ public class Graph {
         Node n4 = new Node(0, 4);
         Node n5 = new Node(0, 5);
         Node n6 = new Node(0, 6);
-        Node n7 = new Node(0, 6);
         test.addNode(n1);
         test.addNode(n2);
         test.addNode(n3);
         test.addNode(n4);
         test.addNode(n5);
         test.addNode(n6);
-        test.addNode(n7);
         test.addEdge(n1, n2);
+        test.addEdge(n2,n3);
         test.addEdge(n1, n3);
         test.addEdge(n2, n4);
         test.addEdge(n3, n4);
@@ -194,11 +285,14 @@ public class Graph {
         test.addEdge(n1, n6);
         test.addEdge(n6, n5);
 
+        test.setStartNode(n1);
+        test.setEndNode(n5);
+
         test.printGraph();
 
-        List<Node> path = test.djikstra2(n1, n5);
-
-        System.out.println("Path: " + path);
+        // List<Node> path1 = test.djikstra2(n1, n5);
+        System.out.println("Path: ");
+        test.DFS(n1, n5);
     }
 
 }
