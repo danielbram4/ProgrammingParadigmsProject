@@ -160,14 +160,71 @@ public class Graph {
 
         return path;
     }
+
     public ArrayList<Node> findPath(Node start, Node end) {
-        ArrayList<Node> path = djikstra2(start, end);
+        // ArrayList<Node> path = djikstra2(start, end);
+        ArrayList<Node> path = depthFirstSearch(start, end);
         // System.out.println("Path: " + path);
 
         return path;
     }
 
+    // public ArrayList<Node> depthFirstSearch(Node startNode, Node endNode) {
+    //     // Set<Node> visited = new HashSet<>();
+    //     ArrayList<Node> visited = new ArrayList<>();
+    //     return depthFirstSearch(startNode, endNode, visited);
+    // }
 
+    // private ArrayList<Node> depthFirstSearch(Node currentNode, Node endNode, ArrayList<Node> visited) {
+    //     visited.add(currentNode);
+    
+    //     if (currentNode == endNode) {
+    //         ArrayList<Node> path = new ArrayList<>();
+    //         path.add(endNode);
+    //         System.out.println("Path: " + null);
+    //         return path;
+    //     }
+    
+    //     List<Node> neighbors = mazeGraph.get(currentNode);
+    //     for (Node neighbor : neighbors) {
+    //         if (!visited.contains(neighbor)) {
+    //             ArrayList<Node> path = depthFirstSearch(neighbor, endNode, visited);
+    //             if (path != null) {
+    //                 // path.add(0, currentNode);
+    //                 System.out.println("Path: " + path);
+    //                 path.add(currentNode);
+    //                 return path;
+    //             }
+    //         }
+    //     }
+    //     System.out.println("Path: " + null);
+    //     return null;
+    // }
+
+    public ArrayList<Node> depthFirstSearch(Node startNode, Node endNode) {
+        Stack<Node> stack = new Stack<>();
+        stack.push(startNode);
+        ArrayList<Node> visited = new ArrayList<>();
+        ArrayList<Node> path = new ArrayList<>();
+        while (!stack.isEmpty()) {
+            Node currentNode = stack.pop();
+            if (currentNode == endNode) {
+                path.add(endNode);
+                return path;
+            }
+            if (!visited.contains(currentNode)) {
+                visited.add(currentNode);
+                List<Node> neighbors = mazeGraph.get(currentNode);
+                for (Node neighbor : neighbors) {
+                    if (!visited.contains(neighbor)) {
+                        stack.push(neighbor);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
     //Used for testing delete when done
     public static void main(String[] args) {
         Graph test = new Graph();
@@ -196,8 +253,8 @@ public class Graph {
 
         test.printGraph();
 
-        List<Node> path = test.djikstra2(n1, n5);
-
+        // List<Node> path1 = test.djikstra2(n1, n5);
+        ArrayList<Node> path = test.depthFirstSearch(n1, n5);
         System.out.println("Path: " + path);
     }
 
