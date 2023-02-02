@@ -10,10 +10,10 @@ public class Main {
         // Use the MazeBuilder instance to build a maze
         Maze maze = mazeBuilder.buildMaze();
 
-        
-
         // Use the GraphBuilder instance to build a graph based on the maze
         Graph graph = graphBuilder.buildGraph(maze);
+
+        // graph.getGraph().printGraph();
 
         // Create an instance of the MazeSolver class, passing the maze as a parameter
         MazeSolver solver = new MazeSolver(maze);
