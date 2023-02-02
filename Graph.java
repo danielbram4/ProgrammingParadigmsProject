@@ -169,67 +169,6 @@ public class Graph {
         return path;
     }
 
-    // public ArrayList<Node> depthFirstSearch(Node startNode, Node endNode) {
-    //     // Set<Node> visited = new HashSet<>();
-    //     ArrayList<Node> visited = new ArrayList<>();
-    //     return depthFirstSearch(startNode, endNode, visited);
-    // }
-
-    // private ArrayList<Node> depthFirstSearch(Node currentNode, Node endNode, ArrayList<Node> visited) {
-    //     visited.add(currentNode);
-    
-    //     if (currentNode == endNode) {
-    //         ArrayList<Node> path = new ArrayList<>();
-    //         path.add(endNode);
-    //         System.out.println("Path: " + null);
-    //         return path;
-    //     }
-    
-    //     List<Node> neighbors = mazeGraph.get(currentNode);
-    //     for (Node neighbor : neighbors) {
-    //         if (!visited.contains(neighbor)) {
-    //             ArrayList<Node> path = depthFirstSearch(neighbor, endNode, visited);
-    //             if (path != null) {
-    //                 // path.add(0, currentNode);
-    //                 System.out.println("Path: " + path);
-    //                 path.add(currentNode);
-    //                 return path;
-    //             }
-    //         }
-    //     }
-    //     System.out.println("Path: " + null);
-    //     return null;
-    // }
-
-    public ArrayList<Node> depthFirstSearch(Node startNode, Node endNode) {
-        // Stack<Node> stack = new Stack<>();
-        // stack.push(startNode);
-
-        ArrayList<Node> queue = new ArrayList<>();
-        queue.add(startNode);
-        ArrayList<Node> visited = new ArrayList<>();
-        ArrayList<Node> path = new ArrayList<>();
-        int x = 0;
-        while (!queue.isEmpty()) {
-            Node currentNode = queue.get(x);
-            if (currentNode == endNode) {
-                path.add(endNode);
-                return path;
-            }
-            if (!visited.contains(currentNode)) {
-                visited.add(currentNode);
-                List<Node> neighbors = mazeGraph.get(currentNode);
-                for (Node neighbor : neighbors) {
-                    if (!visited.contains(neighbor)) {
-                        queue.add(neighbor);
-                    }
-                }
-            }
-            x++;
-        }
-        return null;
-    }
-
     // DFS algorithm adapted from https://gist.github.com/Staticity/0af28ba92b4ea32fef74
     public boolean DFSScott(Node current, Node end, ArrayList<Node> visited, ArrayList<Node> path){
         visited.add(current);
@@ -253,7 +192,7 @@ public class Graph {
         ArrayList<Node> path = new ArrayList<>();
 
         if(DFSScott(start, end, visited, path)){
-            System.out.println(path);
+            // System.out.println(path);
             return path;
         } else {
             return null;
