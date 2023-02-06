@@ -11,8 +11,9 @@ public class Main {
         Maze maze = mazeBuilder.buildMaze();
 
         // Use the GraphBuilder instance to build a graph based on the maze
-        Graph graph = graphBuilder.buildGraph(maze);
-
+        if(maze != null){
+            Graph graph = graphBuilder.buildGraph(maze);
+            if(graph != null){
         // graph.getGraph().printGraph();
 
         // Create an instance of the MazeSolver class, passing the maze as a parameter
@@ -23,6 +24,8 @@ public class Main {
 
         // Use the MazeSolver instance to build and print the solved maze
         solver.buildPrintMaze(path);
+    }
+    }
     }
 }
 

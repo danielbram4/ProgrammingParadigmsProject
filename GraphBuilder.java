@@ -12,12 +12,18 @@ public class GraphBuilder {
      * @return The built graph.
      */
     public Graph buildGraph(Maze maze) {
+        if(maze.getStartCord().getRow() == 0 && maze.getStartCord().getCol() == 0){
+            System.out.println("Improper text file, maze not generated!");
+            return null;
+        }
+        else{
         Node start = new Node(maze.getStartCord().getRow(), maze.getStartCord().getCol());
         graph.addNode(start);
         graph.setStartNode(start);
         checkTrav(start, maze);
         graph.setEndNode(graph.getNode(maze.getEndCord().getRow(), maze.getEndCord().getCol()));
         return graph;
+    }
     }
 
     /**
