@@ -83,6 +83,7 @@ public class MazeSolver {
 				} else if(result.get(x).get(y).equals(Globals.pathValue)){
 					// Replace the path value with path symbol.
 					result.get(x).set(y, Globals.pathSymbol);
+
 				}
 			}
 		}
