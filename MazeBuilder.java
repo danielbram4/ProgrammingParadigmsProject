@@ -8,11 +8,14 @@ public class MazeBuilder {
     // Builds a Maze instance from a file
     public Maze buildMaze(){
 
+        Messages message = new Messages();
         // Ask the user for the filename
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter the filename: ");
+        // System.out.print("Enter the filename: ");
+        message.ENTERFILENAME();
         String fileName = input.nextLine();
         input.close();
+        
     
         // Opening the file
         File file = new File(fileName);
@@ -20,7 +23,8 @@ public class MazeBuilder {
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
-            System.out.println("The file was not found, quitting!\n");
+            // System.out.println("The file was not found, quitting!\n");
+            message.FILENOTFOUND();
             return null;
         }
     

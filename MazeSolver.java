@@ -6,6 +6,7 @@ public class MazeSolver {
 	private ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
 	//startCord and endCord store the start and end coordinates of the maze
 	private Coordinate startCord, endCord;
+	Messages message = new Messages();
 
 	
 	//constructor without parameters, sets result to null
@@ -94,7 +95,8 @@ public class MazeSolver {
 				result.get(path.get(x).getCoordinates().getRow()).set(path.get(x).getCoordinates().getCol(), Globals.ANSI_GREEN +  "X" + Globals.TEXT_RESET);
 			}
 		}catch(NullPointerException e){
-			System.out.println("Path to exit was not found.");
+			// System.out.println("Path to exit was not found.");
+			message.PATHNOTFOUND();
 		}
 
 
