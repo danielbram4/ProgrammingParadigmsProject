@@ -226,34 +226,4 @@ public class GraphBuilder {
     public int getLeftValue(Node n, Maze maze) {
         return maze.getMaze().get(n.getRow()).get(n.getCol() - 1);
     }
-
-
-
-    //You can use this main method for local testing delete when done
-    public static void main(String args[]) {
-        GraphBuilder builder = new GraphBuilder();
-
-        ArrayList<ArrayList<Integer>> maze = new ArrayList<ArrayList<Integer>>();
-        ArrayList<Integer> row1 = new ArrayList<Integer>();
-        ArrayList<Integer> row2 = new ArrayList<Integer>();
-
-        row1.add(1);
-        row1.add(1);
-        row2.add(1);
-        row2.add(1);
-        maze.add(row1);
-        maze.add(row2);
-
-        System.out.println(maze);
-
-        Maze testMaze = new Maze(maze, new Coordinate(0, 0), new Coordinate(1, 1));
-        Node start = new Node(testMaze.getStartCord().getRow(), testMaze.getStartCord().getCol());
-
-        builder.graph.addNode(start);
-
-        builder.checkTrav(start, testMaze);
-
-        builder.graph.printGraph();
-
-    }
 }

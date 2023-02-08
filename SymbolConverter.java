@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class MazeSolver {
+public class SymbolConverter {
 
 	//result is a 2D arrayList that stores the string representation of the maze
 	private ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
@@ -10,12 +10,12 @@ public class MazeSolver {
 
 	
 	//constructor without parameters, sets result to null
-	public MazeSolver() {
+	public SymbolConverter() {
 		result = null;
 	}
 
-	//constructor with a Maze object parameter, initializes the MazeSolver class with the maze information
-	public MazeSolver(Maze maze){
+	//constructor with a Maze object parameter, initializes the MazeprintUnsolvedMaze class with the maze information
+	public SymbolConverter(Maze maze){
 
 		//Copy maze values to result string arrayList
 		for(int x=0; x<maze.getMaze().size(); x++) {
@@ -33,7 +33,7 @@ public class MazeSolver {
 		endCord = maze.getEndCord();
 	}
 
-	public boolean solver()
+	public boolean printUnsolvedMaze()
 	{
 		//Create walls and the start and end points.
 		result.get(startCord.getRow()).set(startCord.getCol(), Globals.startSymbol);
@@ -49,17 +49,6 @@ public class MazeSolver {
 				}
 			}
 		}
-			
-		//Finds path
-		// boolean success = path_finder(maze, startCord);
-		
-		// Clears the result, null needs to be replaced by visited
-		// for(int x=0; x<maze.length; x++)
-		// 	for(int y=0; y<maze[x].length; y++)	
-		// 		if(result[x][y] == null)
-		// 			result[x][y] = " ";		
-		// result[startCord.getX()][startCord.getY()] = "S";
-		// result[endCord.getX()][endCord.getY()] = "E";
 
 		print_result();
 		
@@ -67,12 +56,12 @@ public class MazeSolver {
 	}
 
 	/**
-	 * buildPrintMaze is a function to build and print the final solution of the
+	 * printSolvedMaze is a function to build and print the final solution of the
 	 * maze.
 	 * 
 	 * @param path The path of the solution found in the maze.
 	 */
-	public void buildPrintMaze(ArrayList<Node> path){
+	public void printSolvedMaze(ArrayList<Node> path){
 
 		// Loop through each element in the result list.
 		for(int x=0; x<result.size(); x++) {
@@ -95,10 +84,8 @@ public class MazeSolver {
 				result.get(path.get(x).getCoordinates().getRow()).set(path.get(x).getCoordinates().getCol(), Globals.ANSI_GREEN +  "X" + Globals.TEXT_RESET);
 			}
 		}catch(NullPointerException e){
-			// System.out.println("Path to exit was not found.");
 			message.PATHNOTFOUND();
 		}
-
 
 		result.get(startCord.getRow()).set(startCord.getCol(),Globals.ANSI_BLUE +  "S" + Globals.TEXT_RESET);
 		result.get(endCord.getRow()).set(endCord.getCol(),Globals.ANSI_BLUE +  "E" + Globals.TEXT_RESET);
@@ -122,17 +109,4 @@ public class MazeSolver {
 		}
 		System.out.println();
 	}
-	
-
-	/*
-	 * Method to find a path to the exit of the maze
-	 * Returns true if path to exit is found, false otherwise.
-	 */
-	private boolean path_finder(int[][] maze, Coordinate cord)
-	{
-		return false;
-	}
-
-
-
 }

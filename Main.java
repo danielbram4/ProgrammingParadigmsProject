@@ -18,13 +18,13 @@ public class Main {
                 // graph.getGraph().printGraph();
 
                 // Create an instance of the MazeSolver class, passing the maze as a parameter
-                MazeSolver solver = new MazeSolver(maze);
-                solver.solver();
+                SymbolConverter converter = new SymbolConverter(maze);
+                converter.printUnsolvedMaze();
                 // Find the path from the start node to the end node in the graph
                 ArrayList<Node> path = graph.findPath(graph.getStartNode(), graph.getEndNode());
 
                 // Use the MazeSolver instance to build and print the solved maze
-                solver.buildPrintMaze(path);
+                converter.printSolvedMaze(path);
 
             }
         }
