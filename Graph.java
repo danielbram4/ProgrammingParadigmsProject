@@ -5,6 +5,7 @@ public class Graph {
     private Map<Node, List<Node>> mazeGraph = new HashMap<>();
     private Node startNode, endNode;
 
+
     public Graph() {
         this.mazeGraph = new HashMap<>();
     }

@@ -6,6 +6,7 @@ public class MazeSolver {
 	private ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
 	//startCord and endCord store the start and end coordinates of the maze
 	private Coordinate startCord, endCord;
+	Messages message = new Messages();
 
 	
 	//constructor without parameters, sets result to null
@@ -88,10 +89,16 @@ public class MazeSolver {
 		}
 
 		// Loop through each element in the path list.
-		for(int x=0; x<path.size(); x++){
-			// Replace the elements in the result list with X's (the solution path) at the coordinates of the path.
-			result.get(path.get(x).getCoordinates().getRow()).set(path.get(x).getCoordinates().getCol(), Globals.ANSI_GREEN +  "X" + Globals.TEXT_RESET);
+		try{
+			for(int x=0; x<path.size(); x++){
+				// Replace the elements in the result list with X's (the solution path) at the coordinates of the path.
+				result.get(path.get(x).getCoordinates().getRow()).set(path.get(x).getCoordinates().getCol(), Globals.ANSI_GREEN +  "X" + Globals.TEXT_RESET);
+			}
+		}catch(NullPointerException e){
+			// System.out.println("Path to exit was not found.");
+			message.PATHNOTFOUND();
 		}
+
 
 		result.get(startCord.getRow()).set(startCord.getCol(),Globals.ANSI_BLUE +  "S" + Globals.TEXT_RESET);
 		result.get(endCord.getRow()).set(endCord.getCol(),Globals.ANSI_BLUE +  "E" + Globals.TEXT_RESET);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class GraphBuilder {
 
     private Graph graph = new Graph();
+    Messages message = new Messages();
 
     /**
      * Builds a graph from the given maze.
@@ -12,12 +13,19 @@ public class GraphBuilder {
      * @return The built graph.
      */
     public Graph buildGraph(Maze maze) {
+        if(maze.getStartCord().getRow() == 0 && maze.getStartCord().getCol() == 0){
+            // System.out.println("Improper text file, maze not generated!");
+            message.NOTVALIDFILE();
+            return null;
+        }
+        else{
         Node start = new Node(maze.getStartCord().getRow(), maze.getStartCord().getCol());
         graph.addNode(start);
         graph.setStartNode(start);
         checkTrav(start, maze);
         graph.setEndNode(graph.getNode(maze.getEndCord().getRow(), maze.getEndCord().getCol()));
         return graph;
+    }
     }
 
     /**
