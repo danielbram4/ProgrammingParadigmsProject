@@ -12,11 +12,6 @@ public class Node {
         distance = Integer.MAX_VALUE;
         previous = null;
     }
-
-
-    public Node(){
-        
-    }
     
     public int getRow() {
         return coordinates.getRow();
