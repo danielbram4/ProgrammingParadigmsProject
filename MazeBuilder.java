@@ -9,7 +9,7 @@ public class MazeBuilder {
         // Ask the user for the filename
         Scanner input = new Scanner(System.in);
         // System.out.print("Enter the filename: ");
-        message.ENTERFILENAME();
+        Globals.messageManager.ENTERFILENAME();
         String fileName = input.nextLine();
         input.close();
 
@@ -26,7 +26,7 @@ public class MazeBuilder {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
             // System.out.println("The file was not found, quitting!\n");
-            message.FILENOTFOUND();
+            Globals.messageManager.FILENOTFOUND();
             return null;
         }
 
