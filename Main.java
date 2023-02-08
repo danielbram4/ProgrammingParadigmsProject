@@ -8,7 +8,7 @@ public class Main {
         GraphBuilder graphBuilder = new GraphBuilder();
 
         // Use the MazeBuilder instance to build a maze
-        Maze maze = mazeBuilder.buildMaze();
+        Maze maze = mazeBuilder.buildMaze(mazeBuilder.getFileName());
 
         // Use the GraphBuilder instance to build a graph based on the maze
         Graph graph = graphBuilder.buildGraph(maze);
@@ -23,6 +23,8 @@ public class Main {
 
         // Use the MazeSolver instance to build and print the solved maze
         solver.buildPrintMaze(path);
+
+        System.out.println(System.getProperty("user.dir"));
     }
 }
 

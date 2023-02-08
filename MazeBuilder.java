@@ -5,15 +5,19 @@ import java.util.Scanner;
 
 public class MazeBuilder {
 
-    // Builds a Maze instance from a file
-    public Maze buildMaze(){
-
+    public String getFileName() {
         // Ask the user for the filename
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the filename: ");
         String fileName = input.nextLine();
         input.close();
-    
+
+        return fileName;
+    }
+
+    // Builds a Maze instance from a file
+    public Maze buildMaze(String fileName) {
+
         // Opening the file
         File file = new File(fileName);
         Scanner scanner = null;
@@ -23,7 +27,7 @@ public class MazeBuilder {
             System.out.println("The file was not found, quitting!\n");
             return null;
         }
-    
+
         // Variables to store the start and end points of the maze
         int startX = 0;
         int startY = 0;
@@ -32,11 +36,11 @@ public class MazeBuilder {
 
         // Create an ArrayList to store the maze data
         ArrayList<ArrayList<Integer>> maze = new ArrayList<ArrayList<Integer>>();
-        
+
         int row = 0; // Current row number
-        
+
         // Read the file line by line
-        while(scanner.hasNextLine()){
+        while (scanner.hasNextLine()) {
             String currentLine = scanner.nextLine();
             String[] lineFrag = currentLine.split(";");
             String[] colVals = lineFrag[0].split(" ");
@@ -45,12 +49,12 @@ public class MazeBuilder {
             ArrayList<Integer> col = new ArrayList<Integer>();
 
             // Iterate through the values in the current row
-            for(int i = 0; i < colVals.length; i++){
-                if(colVals[i].equals(Globals.startValue)){
+            for (int i = 0; i < colVals.length; i++) {
+                if (colVals[i].equals(Globals.startValue)) {
                     System.out.println("Found Start at: (" + row + ", " + i + ")");
                     startX = i;
                     startY = row;
-                } else if(colVals[i].equals(Globals.exitValue)){
+                } else if (colVals[i].equals(Globals.exitValue)) {
                     System.out.println("Found End at: (" + row + ", " + i + ")");
                     endX = i;
                     endY = row;
@@ -71,19 +75,9 @@ public class MazeBuilder {
         Coordinate start_pos = new Coordinate(startY, startX);
         Coordinate end_pos = new Coordinate(endY, endX);
         scanner.close();
-    
-        // MazeSolver ms = new MazeSolver(maze, srt_pos, end_pos);
-    
-        // // Find out if maze can be solved, prints maze
-        // boolean solved = ms.solver();
-        // ms.print_result();
-    
-        // if (solved == true)
-        //     System.out.println("Solved!");
-        // else
-        //     System.out.println("Uh oh! Maze could not be solved!");
-    
-    // Return a new Maze instance using the maze data, start position, and end position
-    return new Maze(maze, start_pos, end_pos);
+
+        // Return a new Maze instance using the maze data, start position, and end
+        // position
+        return new Maze(maze, start_pos, end_pos);
     }
 }
