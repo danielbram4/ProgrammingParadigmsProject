@@ -30,9 +30,8 @@ public class Messages {
         System.out.println("The file was not found, quitting!\n");
     }
 
-    public void waitForEnter(String message) {
-        System.out.println("Press enter to "+ message+"...");
-        sc.nextLine();
+    public void noFileGiven(){
+        System.out.println("No file given, quitting!\n");
     }
 
     public void printGraph(Map<Node, List<Node>> mazeGraph, Node startNode, Node endNode) {
