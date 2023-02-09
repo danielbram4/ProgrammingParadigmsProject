@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Main {
+public class MazeSolver {
 
     public static void main(String[] args) {
 
@@ -9,20 +9,23 @@ public class Main {
         GraphBuilder graphBuilder = new GraphBuilder();
 
         // Use the MazeBuilder instance to build a maze
-        Maze maze = mazeBuilder.buildMaze(mazeBuilder.getFileName());
+        Maze maze = mazeBuilder.buildMaze(args[0]);
+
+        Globals.messageManager.printWelome();
+
+        Globals.messageManager.waitForEnter("continue");
 
         // Use the GraphBuilder instance to build a graph based on the maze
         if (maze != null) {
             Graph graph = graphBuilder.buildGraph(maze);
             if (graph != null) {
-                // graph.getGraph().printGraph();
-
                 // Create an instance of the MazeSolver class, passing the maze as a parameter
                 SymbolConverter converter = new SymbolConverter(maze);
                 converter.printUnsolvedMaze();
                 // Find the path from the start node to the end node in the graph
                 ArrayList<Node> path = graph.findPath(graph.getStartNode(), graph.getEndNode());
 
+                Globals.messageManager.waitForEnter("solve");
                 // Use the MazeSolver instance to build and print the solved maze
                 converter.printSolvedMaze(path);
 

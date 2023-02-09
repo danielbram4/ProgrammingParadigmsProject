@@ -5,17 +5,6 @@ import java.util.Scanner;
 
 public class MazeBuilder {
 
-    public String getFileName() {
-        // Ask the user for the filename
-        Scanner input = new Scanner(System.in);
-        // System.out.print("Enter the filename: ");
-        Globals.messageManager.ENTERFILENAME();
-        String fileName = input.nextLine();
-        input.close();
-
-        return fileName;
-    }
-
     // Builds a Maze instance from a file
     public Maze buildMaze(String fileName) {
 
@@ -53,11 +42,9 @@ public class MazeBuilder {
             // Iterate through the values in the current row
             for (int i = 0; i < colVals.length; i++) {
                 if (colVals[i].equals(Globals.startValue)) {
-                    System.out.println("Found Start at: (" + row + ", " + i + ")");
                     startX = i;
                     startY = row;
                 } else if (colVals[i].equals(Globals.exitValue)) {
-                    System.out.println("Found End at: (" + row + ", " + i + ")");
                     endX = i;
                     endY = row;
                     colVals[i] = Globals.pathValue;
