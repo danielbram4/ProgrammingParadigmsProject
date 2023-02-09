@@ -121,10 +121,8 @@ public class Graph {
     }
 
     public ArrayList<Node> findPath(Node start, Node end) {
-        // ArrayList<Node> path = djikstra2(start, end);
         ArrayList<Node> path = DFS(start, end);
-        // System.out.println("Path: " + path);
-
+        Collections.reverse(path);
         return path;
     }
 

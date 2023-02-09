@@ -105,8 +105,8 @@ public class SymbolConverter {
 				// Print the value at the current row and column of the `result` 2D arrayList
 				System.out.print(result.get(x).get(y) + " ");
 			}
-			System.out.println();
+			System.out.print("\n");
 		}
-		System.out.println();
+		System.out.print("\n");
 	}
 }
