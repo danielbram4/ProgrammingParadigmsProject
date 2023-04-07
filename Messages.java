@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.RenderingHints;
 
-//Put all print statements here
 public class Messages {
 
     Scanner sc = new Scanner(System.in);

@@ -18,8 +18,50 @@ public class Graph {
         return mazeGraph;
     }
 
-    public boolean addNode(Node n) {
+    /**
+    This method performs a depth-first search (DFS) on a maze graph to find a path from the start node to the end node.
+    DFS algorithm adapted from https://gist.github.com/Staticity/0af28ba92b4ea32fef74
+    @param current the current node being visited
+    @param end the end node to be reached
+    @param visited a list of nodes that have been visited
+    @param path a list of nodes that make up the path from start to end
+    @return true if a path from start to end is found, false otherwise
+    */
+    public boolean DFSUtil(Node current, Node end, ArrayList<Node> visited, ArrayList<Node> path){
+        visited.add(current);
+        if(current == end){
+            return true;
+        }
+        List<Node> neighbours = new ArrayList<>();
+        neighbours = mazeGraph.get(current);
+        for(Node n : neighbours){
+            if(!visited.contains(n) && DFSUtil(n, end, visited, path)){
+                path.add(n);
+                return true;
+            }
+        
+        }
+        return false;
+    }
 
+    /**
+    This method uses DFS to find a path from the start node to the end node in a maze graph.
+    @param start the start node of the path
+    @param end the end node of the path
+    @return an ArrayList of nodes that make up the path from start to end, or null if no path is found
+    */
+    public ArrayList<Node> DFS(Node start, Node end){
+        ArrayList<Node> visited = new ArrayList<>();
+        ArrayList<Node> path = new ArrayList<>();
+
+        if(DFSUtil(start, end, visited, path)){
+            return path;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean addNode(Node n) {
         if (!checkIfNodeExists(n)) {
             mazeGraph.put(n, new ArrayList<Node>());
             return true;
@@ -86,12 +128,20 @@ public class Graph {
         return mazeGraph.containsKey(n);
     }
 
+
+
+    public ArrayList<Node> findPath(Node start, Node end) {
+        ArrayList<Node> path = DFS(start, end);
+        Collections.reverse(path);
+        return path;
+    }
+
     public void setStartNode(Node n) {
-            startNode = n;
+        startNode = n;
     }
 
     public void setEndNode(Node n) {
-            endNode = n;
+        endNode = n;
     }
 
     public Node getStartNode() {
@@ -118,40 +168,5 @@ public class Graph {
 
         System.out.println("Start Node: " + startNode);
         System.out.println("End Node: " + endNode);
-    }
-
-    public ArrayList<Node> findPath(Node start, Node end) {
-        ArrayList<Node> path = DFS(start, end);
-        Collections.reverse(path);
-        return path;
-    }
-
-    // DFS algorithm adapted from https://gist.github.com/Staticity/0af28ba92b4ea32fef74
-    public boolean DFSUtil(Node current, Node end, ArrayList<Node> visited, ArrayList<Node> path){
-        visited.add(current);
-        if(current == end){
-            return true;
-        }
-        List<Node> neighbours = new ArrayList<>();
-        neighbours = mazeGraph.get(current);
-        for(Node n : neighbours){
-            if(!visited.contains(n) && DFSUtil(n, end, visited, path)){
-                path.add(n);
-                return true;
-            }
-        
-        }
-        return false;
-    }
-
-    public ArrayList<Node> DFS(Node start, Node end){
-        ArrayList<Node> visited = new ArrayList<>();
-        ArrayList<Node> path = new ArrayList<>();
-
-        if(DFSUtil(start, end, visited, path)){
-            return path;
-        } else {
-            return null;
-        }
     }
 }
