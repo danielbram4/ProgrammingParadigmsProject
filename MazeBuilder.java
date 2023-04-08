@@ -8,35 +8,30 @@ public class MazeBuilder {
     // Builds a Maze instance from a file
     public Maze buildMaze(String fileName) {
 
-        // Opening the file
         File file = new File(fileName);
         Scanner scanner = null;
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
-            // System.out.println("The file was not found, quitting!\n");
             Globals.messageManager.FILENOTFOUND();
             return null;
         }
 
-        // Variables to store the start and end points of the maze
+        // Initializing start and end coordinates
         int startX = 0;
         int startY = 0;
         int endX = 0;
         int endY = 0;
 
-        // Create an ArrayList to store the maze data
+        // 2D Array List
         ArrayList<ArrayList<Integer>> maze = new ArrayList<ArrayList<Integer>>();
+        int row = 0;
 
-        int row = 0; // Current row number
-
-        // Read the file line by line
         while (scanner.hasNextLine()) {
             String currentLine = scanner.nextLine();
             String[] lineFrag = currentLine.split(";");
             String[] colVals = lineFrag[0].split(" ");
 
-            // Create a new ArrayList to store the values for the current row
             ArrayList<Integer> col = new ArrayList<Integer>();
 
             // Iterate through the values in the current row
@@ -49,14 +44,9 @@ public class MazeBuilder {
                     endY = row;
                     colVals[i] = Globals.pathValue;
                 }
-
-                // Add the value to the current row's ArrayList
                 col.add(Integer.parseInt(colVals[i]));
             }
-
-            // Add the current row to the maze ArrayList
             maze.add(row, col);
-
             row++;
         }
 
@@ -65,8 +55,6 @@ public class MazeBuilder {
         Coordinate end_pos = new Coordinate(endY, endX);
         scanner.close();
 
-        // Return a new Maze instance using the maze data, start position, and end
-        // position
         return new Maze(maze, start_pos, end_pos);
     }
 }
